@@ -1,0 +1,6 @@
+{
+  "name": "Master Link Bang Ajiib",
+  "description": "Aplikasi manajemen koleksi tautan dan akun development (GitHub, Vercel, Supabase, Firebase) dengan autentikasi aman, kategorisasi, pencarian kilat, dan database Supabase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
