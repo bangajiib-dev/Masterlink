@@ -61,7 +61,14 @@ export const LinkTable: React.FC<LinkTableProps> = ({
         </thead>
         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
           {links.map((link) => {
-            const catColor = CATEGORY_COLORS[link.kategori] || CATEGORY_COLORS['Lainnya'];
+            const defaultColor = { 
+              bg: 'bg-indigo-50', 
+              text: 'text-indigo-700', 
+              border: 'border-indigo-200', 
+              darkBg: 'dark:bg-indigo-950/50', 
+              darkText: 'dark:text-indigo-300' 
+            };
+            const catColor = CATEGORY_COLORS[link.kategori] || (link.kategori === 'Web App Kerjaan' ? CATEGORY_COLORS['Web App Kerjaan'] : defaultColor);
             return (
               <tr 
                 key={link.id} 

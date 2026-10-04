@@ -46,7 +46,14 @@ export const LinkCard: React.FC<LinkCardProps> = ({
     }, 1800);
   };
 
-  const catColor = CATEGORY_COLORS[link.kategori] || CATEGORY_COLORS['Lainnya'];
+  const defaultColor = { 
+    bg: 'bg-indigo-50', 
+    text: 'text-indigo-700', 
+    border: 'border-indigo-200', 
+    darkBg: 'dark:bg-indigo-950/50', 
+    darkText: 'dark:text-indigo-300' 
+  };
+  const catColor = CATEGORY_COLORS[link.kategori] || (link.kategori === 'Web App Kerjaan' ? CATEGORY_COLORS['Web App Kerjaan'] : defaultColor);
 
   // Normalize URLs for opening
   const formatUrl = (url: string) => {
