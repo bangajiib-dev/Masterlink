@@ -103,16 +103,23 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="hidden lg:inline">Backup</span>
             </button>
 
-            {/* Dark Mode Toggle */}
+            {/* Dark / Light Mode Toggle Button */}
             <button
               onClick={toggleTheme}
-              aria-label="Toggle Dark Mode"
-              className="p-2 sm:p-2.5 rounded-lg text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
+              title={theme === 'dark' ? 'Ganti ke Mode Terang (Light Mode)' : 'Ganti ke Mode Gelap (Dark Mode)'}
+              aria-label="Toggle Theme"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-xs transition-all active:scale-95 cursor-pointer"
             >
               {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400" />
+                <>
+                  <Sun className="w-4 h-4 text-amber-400 animate-spin-slow" />
+                  <span className="hidden sm:inline">Terang</span>
+                </>
               ) : (
-                <Moon className="w-4 h-4 text-indigo-600" />
+                <>
+                  <Moon className="w-4 h-4 text-indigo-600" />
+                  <span className="hidden sm:inline">Gelap</span>
+                </>
               )}
             </button>
 

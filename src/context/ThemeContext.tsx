@@ -12,27 +12,56 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
-    const saved = localStorage.getItem('theme_bang_ajiib');
-    if (saved === 'light' || saved === 'dark') return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark'; // default dark for developer vibe
+    try {
+      const saved = localStorage.getItem('theme_bang_ajiib');
+      if (saved === 'light' || saved === 'dark') {
+        return saved;
+      }
+    } catch (e) {
+      console.warn('Could not read theme from localStorage', e);
+    }
+    // Default to dark for developers
+    return 'dark';
   });
 
-  useEffect(() => {
+  const applyTheme = (currentTheme: Theme) => {
     const root = document.documentElement;
-    if (theme === 'dark') {
+    const body = document.body;
+
+    if (currentTheme === 'dark') {
       root.classList.add('dark');
+      body.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
+      root.style.colorScheme = 'dark';
     } else {
       root.classList.remove('dark');
+      body.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
+      root.style.colorScheme = 'light';
     }
-    localStorage.setItem('theme_bang_ajiib', theme);
+
+    try {
+      localStorage.setItem('theme_bang_ajiib', currentTheme);
+    } catch (e) {
+      console.warn('Could not save theme to localStorage', e);
+    }
+  };
+
+  useEffect(() => {
+    applyTheme(theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setThemeState(prev => (prev === 'dark' ? 'light' : 'dark'));
+    setThemeState(prev => {
+      const nextTheme = prev === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+      return nextTheme;
+    });
   };
 
   const setTheme = (t: Theme) => {
     setThemeState(t);
+    applyTheme(t);
   };
 
   return (

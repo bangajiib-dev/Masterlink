@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   * {
     border-color: var(--border, currentColor);
@@ -35,3 +37,4 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
